@@ -30,8 +30,11 @@ validate_summary <- function(data, rules) {
     val_summary <- dplyr::inner_join(summary, rules, by = "name")
 
     errors <- validate::errors(cf) |>
-      as.data.frame() |>
-      tidyr::pivot_longer(everything(), values_to = "error")
+      as.data.frame()
+    if(nrow(errors) > 0) {
+     errors <- errors |>
+       tidyr::pivot_longer(everything(), values_to = "error")
+    }
 
    return(list(summary = val_summary, errors = errors))
 

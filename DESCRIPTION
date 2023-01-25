@@ -18,3 +18,5 @@ Imports:
     validate,
     vroom
 RoxygenNote: 7.2.3
+URL: https://github.com/northeastloon/uisValidate
+BugReports: https://github.com/northeastloon/uisValidate/issues
