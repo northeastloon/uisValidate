@@ -30,7 +30,7 @@ validate_summary <- function(data, rules) {
     val_summary <- dplyr::inner_join(summary, rules, by = "name")
 
     errors <- validate::errors(cf) |>
-      as.data.frame()
+      dplyr::tibble()
     if(nrow(errors) > 0) {
      errors <- errors |>
        tidyr::pivot_longer(everything(), values_to = "error")
@@ -60,7 +60,7 @@ violating_obs <-function(data, rules, names = NULL) {
   vars <- validate::variables(rules)
   id_vars <- c("CO_CODE", "IND_YEAR", "CO_SHORT_NAME", "CO_LONG_NAME", "COUNTRY")
 
-  cf <- validate::confront(dat = as.data.frame(data), x= rules)
+  cf <- validate::confront(dat = data, x= rules)
 
   violating_obs <- validate::violating(data, cf, include_missing = FALSE) |>
     dplyr::select(dplyr::any_of(c(id_vars, vars)))
