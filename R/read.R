@@ -14,7 +14,7 @@
 
 read_uis_data <- function(path) {
 
-  data <- read.csv(path)
+  data <- vroom::vroom(path)
 
   #check if any variables missing from dataframe
   required_vars <- c("CO_CODE", "IND_ID", "IND_YEAR", "FIG", "QUAL", "MAGN")
@@ -31,7 +31,7 @@ read_uis_data <- function(path) {
   if(!is.null(dups)) {
     stop(sprintf("There are suplicate observations for %s indicators"), nrow(dups))
   }
-  return(data)
+  return(as.data.frame(data))
 }
 
 #'parse validation rules
